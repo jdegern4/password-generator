@@ -90,11 +90,10 @@ const symbols = [
 
 // Get references to the #generate element
 var generateBtn = document.getElementById("generate");
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
 
 // Write password to the #password input
 function writePassword() {
+  console.log("Did I get clicked?");
   var password = generatePassword();
   var passwordText = document.getElementById("password");
 
@@ -122,7 +121,6 @@ function generatePassword() {
   );
   if (passwordUppercase) {
     chosenCharacters = chosenCharacters.concat(upperCase);
-    console.log(chosenCharacters);
   }
 
   var passwordLowercase = confirm(
@@ -130,7 +128,6 @@ function generatePassword() {
   );
   if (passwordLowercase) {
     chosenCharacters = chosenCharacters.concat(lowerCase);
-    console.log(chosenCharacters);
   }
 
   var passwordNumbers = confirm(
@@ -138,7 +135,6 @@ function generatePassword() {
   );
   if (passwordNumbers) {
     chosenCharacters = chosenCharacters.concat(numbers);
-    console.log(chosenCharacters);
   }
 
   var passwordSymbols = confirm(
@@ -146,7 +142,6 @@ function generatePassword() {
   );
   if (passwordSymbols) {
     chosenCharacters = chosenCharacters.concat(symbols);
-    console.log(chosenCharacters);
   }
 
   // Prompt user to start over if no characters are selected
@@ -154,7 +149,7 @@ function generatePassword() {
     !passwordLowercase &&
     !passwordUppercase &&
     !passwordNumbers &&
-    passwordSymbols
+    !passwordSymbols
   ) {
     alert("No characters selected, please try again.");
     generatePassword();
@@ -165,6 +160,9 @@ function generatePassword() {
     randomPW[i] =
       chosenCharacters[Math.floor(Math.random() * chosenCharacters.length)];
   }
-  console.log(randomPW.join(''));
+  
   return randomPW.join('');
 };
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword());
